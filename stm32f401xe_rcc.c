@@ -6,7 +6,7 @@
  */
 #include "stm32f401xe_rcc.h"
 
-/*
+
 uint16_t AHB_PreScaler[8] = {2,4,8,16,64,128,256,512};    //AHB prescaler,control AHB clock division factor
 uint8_t APB1_PreScaler[4] = { 2, 4 , 8, 16};
 
@@ -109,4 +109,4 @@ uint32_t  RCC_GetPLLOutputClock()
 
 	return 0;
 }
-*/
+
