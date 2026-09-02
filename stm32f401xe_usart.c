@@ -39,14 +39,14 @@ Example: F_CK = 16 MHz, Baud = 115200, OVER8 = 0
     if (pUSARTx == USART1 || pUSARTx == USART6)
     {
         // USART1 and USART6 are on APB2
-        //PCLKx = RCC_GetPCLK2Value();
-    	PCLKx=16000000;
+        PCLKx = RCC_GetPCLK2Value();
+    	//PCLKx=16000000;
     }
     else
     {
         // USART2, USART3, UART4, UART5 are on APB1
-        //PCLKx = RCC_GetPCLK1Value();
-        PCLKx=16000000;
+        PCLKx = RCC_GetPCLK1Value();
+        //PCLKx=16000000;
     }
 
     // Check OVER8 bit
@@ -104,7 +104,7 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 	//Temporary variable
 	uint32_t tempreg=0;  // Used to configure the CR1, CR2 and CR3 registers
 
-/******************************** Configuration of CR1******************************************/
+/* Configuration of CR1*/
 
 	//Implement the code to enable the Clock for given USART peripheral
 	 USART_PeriClockControl(pUSARTHandle->pUSARTx,ENABLE);       
@@ -151,7 +151,7 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
    //Program the CR1 register
 	pUSARTHandle->pUSARTx->CR1 = tempreg;                   
 
-/******************************** Configuration of CR2******************************************/
+/* Configuration of CR2*/
 
 	tempreg=0;
 
@@ -161,7 +161,7 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 	//Program the CR2 register
 	pUSARTHandle->pUSARTx->CR2 = tempreg;
 
-/******************************** Configuration of CR3******************************************/
+/* Configuration of CR3*/
 
 	tempreg=0;
 
@@ -187,10 +187,30 @@ void USART_Init(USART_Handle_t *pUSARTHandle)
 
 	pUSARTHandle->pUSARTx->CR3 = tempreg;
 
-/******************************** Configuration of BRR(Baudrate register)******************************************/
+/*Configuration of BRR(Baudrate register)*/
 
 	//Implement the code to configure the baud rate(BRR register) using the function USART_SetBaudRate()
 	USART_SetBaudRate(pUSARTHandle->pUSARTx,pUSARTHandle->USART_Config.USART_Baud);
+
+}
+/***************************USART Deinit Function***********************/
+
+void USART_DeInit(GPIO_RegDef_t *pSPIx)
+{
+
+
+		        if (pUSARTx == USART1)
+		        {
+		        	USART1_REG_RESET();
+		        }
+		        else  if (pUSARTx == USART2)
+		        {
+		        	USART2_REG_RESET();
+		        }
+		        else  if (pUSARTx == USART6)
+		        {
+		        	USART6_REG_RESET();
+		        }
 
 }
 
